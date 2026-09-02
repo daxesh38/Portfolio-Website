@@ -76,26 +76,31 @@
   .btn-ghost{ border:1px solid var(--border); color:var(--text); background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.02); }
   .btn-ghost:hover{ border-color:var(--primary); color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
   
-  .social-row{ display:flex; gap:12px; }
+  .social-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
   .social-row a{ width:44px; height:44px; background:#fff; border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--muted); transition:all .2s ease; box-shadow:0 2px 6px rgba(0,0,0,0.02); }
   .social-row a:hover{ color:var(--primary); border-color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
   .social-row img{ width:22px; height:22px; object-fit:contain; }
+  
+  .phone-link{ display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--border); padding:8px 16px; border-radius:10px; text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600; color:var(--text); box-shadow:0 2px 6px rgba(0,0,0,0.02); transition:all .2s ease; }
+  .phone-link:hover{ border-color:var(--primary); color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
+  .phone-link img{ width:20px; height:20px; object-fit:contain; }
 
-  /* 3D Hover-Flip Animated Profile Picture Card */
-  .flip{ position:relative; width:100%; max-width:380px; margin:0 auto; aspect-ratio:1/1.08; perspective:1600px; cursor:pointer; }
-  .flip .halo{ position:absolute; inset:-20px; border-radius:30px; background:linear-gradient(135deg,#2563eb,#60a5fa,#93c5fd); filter:blur(28px); opacity:0.4; z-index:0; }
-  .flip-inner{ position:relative; width:100%; height:100%; z-index:1; transition:transform .8s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d; }
-  .flip.flipped .flip-inner{ transform:rotateY(180deg); }
+  /* 3D Pure Hover-Flip Profile Card (Triggers on hover smoothly) */
+  .flip{ position:relative; width:100%; max-width:380px; margin:0 auto; aspect-ratio:1/1.08; perspective:1600px; }
+  .flip .halo{ position:absolute; inset:-20px; border-radius:30px; background:linear-gradient(135deg,#2563eb,#60a5fa,#93c5fd); filter:blur(28px); opacity:0.35; z-index:0; }
+  .flip-inner{ position:relative; width:100%; height:100%; z-index:1; transition:transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style:preserve-3d; }
+  .flip:hover .flip-inner{ transform:rotateY(180deg); }
   .flip-face{ position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); background:#fff; box-shadow:0 20px 40px -15px rgba(37,99,235,0.2); }
   .flip-front{ padding:12px; }
   .flip-front img{ width:100%; height:100%; object-fit:cover; border-radius:12px; display:block; }
   .flip-hint{ position:absolute; z-index:2; bottom:18px; left:50%; transform:translateX(-50%); white-space:nowrap; background:rgba(255,255,255,0.92); border:1px solid var(--border); backdrop-filter:blur(8px); border-radius:100px; padding:8px 18px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--primary); display:flex; align-items:center; gap:8px; pointer-events:none; box-shadow:0 6px 16px rgba(0,0,0,0.08); font-weight:600; }
-  .flip-back{ transform:rotateY(180deg); background:linear-gradient(145deg,#ffffff,#f8fafc); border:1px solid var(--border); padding:32px; display:flex; flex-direction:column; justify-content:center; }
-  .flip-back .fb-label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:12px; font-weight:700; }
-  .flip-back h4{ font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; margin:0 0 12px; color:#0f172a; font-weight:800; }
-  .flip-back p{ color:var(--muted); font-size:14px; line-height:1.65; margin:0 0 14px; }
-  .flip-back .focus{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
-  .flip-back .focus span{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--primary); background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); border-radius:100px; padding:4px 10px; font-weight:600; }
+  
+  .flip-back{ transform:rotateY(180deg); background:linear-gradient(145deg,#ffffff,#f8fafc); border:1px solid var(--border); padding:28px 24px; display:flex; flex-direction:column; justify-content:flex-start; overflow-y:auto; max-height:100%; }
+  .flip-back .fb-label{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:8px; font-weight:700; }
+  .flip-back h4{ font-family:'Plus Jakarta Sans',sans-serif; font-size:20px; margin:0 0 10px; color:#0f172a; font-weight:800; }
+  .flip-back p{ color:var(--muted); font-size:13px; line-height:1.55; margin:0 0 10px; }
+  .flip-back .focus{ display:flex; flex-wrap:wrap; gap:5px; margin-top:4px; }
+  .flip-back .focus span{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--primary); background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); border-radius:100px; padding:3px 8px; font-weight:600; }
 
   /* Stats Row */
   .stat-row{ margin-top:80px; display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff; box-shadow:0 15px 35px -10px rgba(0,0,0,0.05); }
@@ -257,19 +262,20 @@
               <a href="https://github.com/daxesh38" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><img src="icons8-github-logo-48.png" alt="GitHub"></a>
               <a href="https://www.linkedin.com/in/daxesh-patel-0a451a294/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><img src="icons8-linkedin-48.png" alt="LinkedIn"></a>
               <a href="mailto:daxeshdataanalyst@gmail.com" aria-label="Email" title="Email"><img src="icons8-gmail-48.png" alt="Email"></a>
+              <a href="tel:+919727952878" class="phone-link" aria-label="Call Me" title="Call Me"><img src="icons8-phone-48.png" alt="Phone">+91 97279 52878</a>
             </div>
           </div>
         </div>
 
-        <!-- Circular Profile Image Frame with 3D Hover-Flip matching reference -->
+        <!-- Pure Hover-Flip Animated Profile Picture Card -->
         <div>
-          <div class="flip" id="flipCard" onclick="this.classList.toggle('flipped')">
+          <div class="flip">
             <div class="halo"></div>
             <div class="flip-inner">
               <div class="flip-face flip-front">
                 <img src="profile pic.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 400 400\'><rect width=\'400\' height=\'400\' fill=\'%232563eb\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'24\' fill=\'%23ffffff\' font-weight=\'bold\'>Daxesh Patel</text></svg>'" alt="Daxesh Patel">
                 <div class="flip-hint">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 1 0 9-9M3 12l3-3M3 12l3 3"/></svg>Hover / Click to read my story
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 1 0 9-9M3 12l3-3M3 12l3 3"/></svg>Hover to read my story
                 </div>
               </div>
               <div class="flip-face flip-back">
@@ -303,7 +309,7 @@
 
         <div class="skill-badge">
           <div class="skill-ico"><img src="icons8-power-bi-logo-48.png" alt="Power BI"></div>
-          <div><h4>Power BI</h4><p>Desktop &amp; Service — interactive dashboards, KPI scorecards, report publishing, data storytelling.</p></div>
+          <div><h4>Power BI &amp; DAX</h4><p>Interactive dashboards, KPI scorecards, DAX measures, time intelligence, and report publishing.</p></div>
         </div>
 
         <div class="skill-badge">
@@ -318,7 +324,7 @@
 
         <div class="skill-badge">
           <div class="skill-ico"><img src="icons8-data-modeling-32.png" alt="Data Modelling"></div>
-          <div><h4>Data Modelling</h4><p>Star &amp; snowflake schema design, fact/dimension modelling, DAX measures and time intelligence.</p></div>
+          <div><h4>Data Modelling</h4><p>Star &amp; snowflake schema design, fact/dimension modelling, and structural schema organization.</p></div>
         </div>
 
         <div class="skill-badge">
@@ -579,11 +585,17 @@
           <div class="contact-ico"><img src="icons8-github-logo-48.png" alt="GitHub"></div>
           <div><span class="k">GitHub</span><span class="v">github.com/daxesh38</span></div>
         </a>
+        <a class="contact-card" href="tel:+919727952878">
+          <div class="contact-ico"><img src="icons8-phone-48.png" alt="Phone"></div>
+          <div><span class="k">Phone</span><span class="v">+91 97279 52878</span></div>
+        </a>
       </div>
 
       <!-- THANK YOU MESSAGE -->
       <div class="thanks">
-        <div class="pulse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="pulse">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
         <h2>Thank you for visiting <em>my portfolio!</em></h2>
         <p>Let's turn your complex data into clear insights and impactful business decisions.</p>
       </div>
@@ -636,7 +648,7 @@
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const embedUrl = btn.getAttribute('data-embed');
-      const title = btn.getAttribute('data-title') || 'Power BI Report';
+      const title = btn.getAttribute('data-title') / 'Power BI Report';
       if(!embedUrl) return;
       modalTitle.textContent = title;
       modalIframe.src = embedUrl;
