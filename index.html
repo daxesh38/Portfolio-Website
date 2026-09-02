@@ -76,14 +76,10 @@
   .btn-ghost{ border:1px solid var(--border); color:var(--text); background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.02); }
   .btn-ghost:hover{ border-color:var(--primary); color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
   
-  .social-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  .social-row a{ width:44px; height:44px; background:#fff; border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--muted); transition:all .2s ease; box-shadow:0 2px 6px rgba(0,0,0,0.02); }
+  .social-row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .social-row a{ width:44px; height:44px; background:#fff; border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--muted); transition:all .2s ease; box-shadow:0 2px 6px rgba(0,0,0,0.02); padding:10px; flex-shrink:0; }
   .social-row a:hover{ color:var(--primary); border-color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
-  .social-row img{ width:22px; height:22px; object-fit:contain; }
-  
-  .phone-link{ display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--border); padding:8px 16px; border-radius:10px; text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600; color:var(--text); box-shadow:0 2px 6px rgba(0,0,0,0.02); transition:all .2s ease; }
-  .phone-link:hover{ border-color:var(--primary); color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
-  .phone-link img{ width:20px; height:20px; object-fit:contain; }
+  .social-row img{ width:100%; height:100%; object-fit:contain; display:block; }
 
   /* 3D Pure Hover-Flip Profile Card (Triggers on hover smoothly) */
   .flip{ position:relative; width:100%; max-width:380px; margin:0 auto; aspect-ratio:1/1.08; perspective:1600px; }
@@ -95,12 +91,12 @@
   .flip-front img{ width:100%; height:100%; object-fit:cover; border-radius:12px; display:block; }
   .flip-hint{ position:absolute; z-index:2; bottom:18px; left:50%; transform:translateX(-50%); white-space:nowrap; background:rgba(255,255,255,0.92); border:1px solid var(--border); backdrop-filter:blur(8px); border-radius:100px; padding:8px 18px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--primary); display:flex; align-items:center; gap:8px; pointer-events:none; box-shadow:0 6px 16px rgba(0,0,0,0.08); font-weight:600; }
   
-  .flip-back{ transform:rotateY(180deg); background:linear-gradient(145deg,#ffffff,#f8fafc); border:1px solid var(--border); padding:28px 24px; display:flex; flex-direction:column; justify-content:flex-start; overflow-y:auto; max-height:100%; }
-  .flip-back .fb-label{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:8px; font-weight:700; }
-  .flip-back h4{ font-family:'Plus Jakarta Sans',sans-serif; font-size:20px; margin:0 0 10px; color:#0f172a; font-weight:800; }
-  .flip-back p{ color:var(--muted); font-size:13px; line-height:1.55; margin:0 0 10px; }
-  .flip-back .focus{ display:flex; flex-wrap:wrap; gap:5px; margin-top:4px; }
-  .flip-back .focus span{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--primary); background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); border-radius:100px; padding:3px 8px; font-weight:600; }
+  .flip-back{ transform:rotateY(180deg); background:linear-gradient(145deg,#ffffff,#f8fafc); border:1px solid var(--border); padding:32px 28px; display:flex; flex-direction:column; justify-content:center; }
+  .flip-back .fb-label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:10px; font-weight:700; }
+  .flip-back h4{ font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; margin:0 0 12px; color:#0f172a; font-weight:800; }
+  .flip-back p{ color:var(--muted); font-size:13.5px; line-height:1.6; margin:0 0 12px; }
+  .flip-back .focus{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .flip-back .focus span{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--primary); background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); border-radius:100px; padding:4px 10px; font-weight:600; }
 
   /* Stats Row */
   .stat-row{ margin-top:80px; display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff; box-shadow:0 15px 35px -10px rgba(0,0,0,0.05); }
@@ -112,7 +108,7 @@
   .stat b .u{ color:var(--primary); }
   .stat span{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-top:8px; display:block; font-weight:600; }
 
-  /* Skills Grid with Real Uploaded Logos & Symbols */
+  /* Skills Grid */
   .skill-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
   @media (max-width:820px){ .skill-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:520px){ .skill-grid{ grid-template-columns:1fr; } }
@@ -135,7 +131,7 @@
   .xp-awards{ margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; }
   .xp-awards span{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#1d4ed8; background:var(--primary-soft); border:1px solid rgba(37,99,235,0.25); border-radius:100px; padding:4px 12px; font-weight:600; }
 
-  /* Projects (Exact Pinned Order Matching GitHub Profile) */
+  /* Projects */
   .proj-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   @media (max-width:900px){ .proj-grid{ grid-template-columns:1fr 1fr; } }
   @media (max-width:600px){ .proj-grid{ grid-template-columns:1fr; } }
@@ -217,7 +213,7 @@
 </head>
 <body>
 
-<!-- Navigation Bar matching the Canva reference layout -->
+<!-- Navigation Bar -->
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top"><span class="brand-badge">DP</span>Daxesh Patel</a>
@@ -254,7 +250,7 @@
             <a class="btn btn-primary" href="#projects">View live dashboards
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a class="btn btn-ghost" href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoK..." download="Daxesh_Patel_Data_Analyst_CV.pdf">
+            <a class="btn btn-ghost" href="Daxesh_Patel_DA_CV.pdf" download="Daxesh_Patel_DA_CV.pdf">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
               Download CV
             </a>
@@ -262,7 +258,7 @@
               <a href="https://github.com/daxesh38" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><img src="icons8-github-logo-48.png" alt="GitHub"></a>
               <a href="https://www.linkedin.com/in/daxesh-patel-0a451a294/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><img src="icons8-linkedin-48.png" alt="LinkedIn"></a>
               <a href="mailto:daxeshdataanalyst@gmail.com" aria-label="Email" title="Email"><img src="icons8-gmail-48.png" alt="Email"></a>
-              <a href="tel:+919727952878" class="phone-link" aria-label="Call Me" title="Call Me"><img src="icons8-phone-48.png" alt="Phone">+91 97279 52878</a>
+              <a href="tel:+919727952878" class="social-row-phone" aria-label="Call Me" title="Call Me"><img src="icons8-phone-48.png" alt="Phone"></a>
             </div>
           </div>
         </div>
@@ -299,7 +295,7 @@
     </div>
   </section>
 
-  <!-- SKILLS SECTION WITH REAL UPLOADED LOGOS & SYMBOLS -->
+  <!-- SKILLS SECTION -->
   <section id="skills">
     <div class="wrap">
       <div class="col-label">SKILL SET</div>
@@ -341,7 +337,7 @@
     </div>
   </section>
 
-  <!-- PROJECTS (Exact Pinned Order Matching GitHub Profile with Correct PNG Previews) -->
+  <!-- PROJECTS (Exact Pinned Order Matching GitHub Profile) -->
   <section id="projects">
     <div class="wrap">
       <div class="col-label">PORTFOLIO WORK</div>
@@ -648,7 +644,7 @@
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const embedUrl = btn.getAttribute('data-embed');
-      const title = btn.getAttribute('data-title') / 'Power BI Report';
+      const title = btn.getAttribute('data-title') || 'Power BI Report';
       if(!embedUrl) return;
       modalTitle.textContent = title;
       modalIframe.src = embedUrl;
