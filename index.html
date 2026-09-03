@@ -63,7 +63,6 @@
   .hero h1{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(38px,5.2vw,54px); line-height:1.08; letter-spacing:-0.03em; margin:0 0 24px; color:#0f172a; }
   .hero h1 span.accent{ color:var(--primary); display:block; margin-top:4px; }
   
-  /* Typing cursor effect */
   .typed-text::after{ content:'|'; animation:blink 1s infinite; color:var(--primary); font-weight:400; }
   @keyframes blink{ 0%,100%{ opacity:1;} 50%{ opacity:0;} }
 
@@ -93,7 +92,6 @@
   .flip-face{ position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); background:#fff; box-shadow:0 20px 40px -15px rgba(37,99,235,0.2); }
   .flip-front{ padding:12px; }
   .flip-front img{ width:100%; height:100%; object-fit:cover; border-radius:12px; display:block; }
-  .flip-hint{ position:absolute; z-index:2; bottom:18px; left:50%; transform:translateX(-50%); white-space:nowrap; background:rgba(255,255,255,0.92); border:1px solid var(--border); backdrop-filter:blur(8px); border-radius:100px; padding:8px 18px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--primary); display:flex; align-items:center; gap:8px; pointer-events:none; box-shadow:0 6px 16px rgba(0,0,0,0.08); font-weight:600; }
   
   .flip-back{ transform:rotateY(180deg); background:linear-gradient(145deg,#ffffff,#f8fafc); border:1px solid var(--border); padding:32px 28px; display:flex; flex-direction:column; justify-content:center; }
   .flip-back .fb-label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:12px; font-weight:700; }
@@ -102,14 +100,21 @@
   .flip-back .focus{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
   .flip-back .focus span{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--primary); background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); border-radius:100px; padding:4px 10px; font-weight:600; }
 
-  /* Rain Skill Symbols Animation (First 7 Seconds) */
+  /* Rain Skill Symbols Animation (First 7 Seconds with real uploaded images/symbols) */
   #skill-rain-container{ position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden; }
-  .rain-symbol{ position:absolute; top:-60px; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; color:var(--primary); background:rgba(255,255,255,0.85); border:1px solid var(--border); padding:4px 10px; border-radius:100px; box-shadow:0 4px 12px rgba(37,99,235,0.15); animation:rainDrop linear forwards; opacity:0; }
-  @keyframes rainDrop{ 0%{ transform:translateY(0) scale(0.8); opacity:0.9;} 80%{ opacity:0.9;} 100%{ transform:translateY(105vh) scale(1.1); opacity:0;} }
+  .rain-symbol{ position:absolute; top:-60px; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; color:var(--primary); background:rgba(255,255,255,0.92); border:1px solid var(--border); padding:5px 12px; border-radius:100px; box-shadow:0 4px 14px rgba(37,99,235,0.2); animation:rainDrop linear forwards; opacity:0; display:flex; align-items:center; gap:6px; }
+  .rain-symbol img{ width:16px; height:16px; object-fit:contain; }
+  @keyframes rainDrop{ 0%{ transform:translateY(0) scale(0.8); opacity:0.95;} 80%{ opacity:0.95;} 100%{ transform:translateY(105vh) scale(1.1); opacity:0;} }
 
-  /* Bounce animation when reaching bottom */
-  @keyframes bouncePop{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px) scale(1.05); } }
+  /* Bounce animation when reaching bottom contact */
+  @keyframes bouncePop{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px) scale(1.06); } }
   .bounce-contact{ animation:bouncePop 0.8s ease 2; }
+
+  /* Scroll-Triggered Core Skills Animation Classes */
+  .skill-anim-left{ opacity:0; transform:translateX(-60px); transition:all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .skill-anim-right{ opacity:0; transform:translateX(60px); transition:all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .skill-anim-air{ opacity:0; transform:translateY(50px) scale(0.92); transition:all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .skill-anim-left.active, .skill-anim-right.active, .skill-anim-air.active{ opacity:1; transform:translate(0) scale(1); }
 
   /* Stats Row */
   .stat-row{ margin-top:80px; display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff; box-shadow:0 15px 35px -10px rgba(0,0,0,0.05); }
@@ -125,7 +130,7 @@
   .skill-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
   @media (max-width:820px){ .skill-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:520px){ .skill-grid{ grid-template-columns:1fr; } }
-  .skill-badge{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:26px; display:flex; gap:18px; align-items:flex-start; transition:all .25s ease; box-shadow:0 4px 15px rgba(0,0,0,0.03); }
+  .skill-badge{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:26px; display:flex; gap:18px; align-items:flex-start; box-shadow:0 4px 15px rgba(0,0,0,0.03); }
   .skill-badge:hover{ transform:translateY(-4px); border-color:var(--primary); box-shadow:0 15px 35px -12px rgba(37,99,235,0.2); }
   .skill-ico{ width:52px; height:52px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:var(--primary-soft); border:1px solid rgba(37,99,235,0.15); padding:8px; }
   .skill-ico img{ width:100%; height:100%; object-fit:contain; display:block; }
@@ -203,14 +208,13 @@
   .cert-badge .prog{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#d97706; margin-top:8px; font-weight:600; }
   .cert-full{ grid-column:1/-1; }
 
-  /* Contact & Thank You */
+  /* Contact & Symbol-Only Cards */
   .contact-grid{ display:flex; flex-wrap:wrap; gap:18px; }
-  .contact-card{ flex:1; min-width:220px; border:1px solid var(--border); border-radius:var(--radius); padding:24px; text-decoration:none; transition:all .2s ease; display:flex; gap:16px; align-items:center; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.03); }
-  .contact-card:hover{ border-color:var(--primary); transform:translateY(-3px); box-shadow:0 15px 35px -10px rgba(37,99,235,0.15); }
-  .contact-ico{ width:44px; height:44px; border-radius:12px; background:var(--primary-soft); border:1px solid rgba(37,99,235,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:10px; }
-  .contact-ico img{ width:100%; height:100%; object-fit:contain; display:block; }
-  .contact-card .k{ font-family:'JetBrains Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); display:block; margin-bottom:4px; font-weight:700; }
-  .contact-card .v{ font-family:'Plus Jakarta Sans',sans-serif; font-size:15.5px; word-break:break-word; color:#0f172a; font-weight:700; }
+  .contact-card{ flex:1; min-width:130px; border:1px solid var(--border); border-radius:var(--radius); padding:26px 20px; text-decoration:none; transition:all .2s ease; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.03); text-align:center; }
+  .contact-card:hover{ border-color:var(--primary); transform:translateY(-4px); box-shadow:0 15px 35px -10px rgba(37,99,235,0.2); }
+  .contact-ico-large{ width:56px; height:56px; border-radius:14px; background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); display:flex; align-items:center; justify-content:center; padding:12px; }
+  .contact-ico-large img{ width:100%; height:100%; object-fit:contain; display:block; }
+  .contact-card .label-txt{ font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); font-weight:700; }
 
   .thanks{ text-align:center; padding:100px 0 50px; position:relative; overflow:hidden; }
   .thanks .pulse{ width:64px; height:64px; margin:0 auto 24px; border-radius:50%; background:var(--primary-soft); border:1px solid rgba(37,99,235,0.25); display:flex; align-items:center; justify-content:center; animation:pulse 2.6s ease-in-out infinite; }
@@ -226,7 +230,7 @@
 </head>
 <body>
 
-<!-- Skill Rain Animation Container -->
+<!-- Skill Rain Animation Container (First 7 Seconds with real uploaded symbols) -->
 <div id="skill-rain-container"></div>
 
 <!-- Navigation Bar -->
@@ -279,16 +283,13 @@
           </div>
         </div>
 
-        <!-- Pure Hover-Flip Animated Profile Picture Card (No Story Text, Professional Formatting) -->
+        <!-- Pure Hover-Flip Animated Profile Picture Card (No Hover text, clean back overview) -->
         <div>
           <div class="flip">
             <div class="halo"></div>
             <div class="flip-inner">
               <div class="flip-face flip-front">
                 <img src="profile pic.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 400 400\'><rect width=\'400\' height=\'400\' fill=\'%232563eb\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'24\' fill=\'%23ffffff\' font-weight=\'bold\'>Daxesh Patel</text></svg>'" alt="Daxesh Patel">
-                <div class="flip-hint">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 1 0 9-9M3 12l3-3M3 12l3 3"/></svg>Hover to inspect profile
-                </div>
               </div>
               <div class="flip-face flip-back">
                 <div class="fb-label">Professional Overview</div>
@@ -311,7 +312,7 @@
     </div>
   </section>
 
-  <!-- SKILLS SECTION -->
+  <!-- SKILLS SECTION WITH SCROLL ANIMATIONS (Left, Right, Air drop) -->
   <section id="skills">
     <div class="wrap">
       <div class="col-label">SKILL SET</div>
@@ -319,32 +320,32 @@
       <p class="h-sub">The stack behind every dashboard — from raw extract to published report.</p>
       <div class="skill-grid">
 
-        <div class="skill-badge">
+        <div class="skill-badge skill-anim-left">
           <div class="skill-ico"><img src="icons8-power-bi-logo-48.png" alt="Power BI"></div>
           <div><h4>Power BI &amp; DAX</h4><p>Interactive dashboards, KPI scorecards, DAX measures, time intelligence, and report publishing.</p></div>
         </div>
 
-        <div class="skill-badge">
+        <div class="skill-badge skill-anim-air">
           <div class="skill-ico"><img src="icons8-mysql-logo-48.png" alt="MySQL"></div>
           <div><h4>MySQL</h4><p>Relational database concepts and data extraction for reporting and downstream analysis.</p></div>
         </div>
 
-        <div class="skill-badge">
+        <div class="skill-badge skill-anim-right">
           <div class="skill-ico"><img src="icons8-excel-48.png" alt="Excel"></div>
           <div><h4>Excel</h4><p>Pivot tables, report automation, MIS &amp; exception reporting, trend and variance analysis.</p></div>
         </div>
 
-        <div class="skill-badge">
+        <div class="skill-badge skill-anim-left">
           <div class="skill-ico"><img src="icons8-data-modeling-32.png" alt="Data Modelling"></div>
           <div><h4>Data Modelling</h4><p>Star &amp; snowflake schema design, fact/dimension modelling, and structural schema organization.</p></div>
         </div>
 
-        <div class="skill-badge">
+        <div class="skill-badge skill-anim-air">
           <div class="skill-ico"><img src="icons8-sql-48.png" alt="SQL / ETL"></div>
           <div><h4>ETL &amp; SQL</h4><p>Power Query (M) transformations, data pipeline automation, and ERP/HRIS data extraction.</p></div>
         </div>
 
-        <div class="skill-badge">
+        <div class="skill-badge skill-anim-right">
           <div class="skill-ico"><img src="icons8-data-analysis-60.png" alt="Data Cleaning"></div>
           <div><h4>Data Cleaning &amp; QC</h4><p>Cleansing, transformation, validation, and data-accuracy control for decision-ready reporting.</p></div>
         </div>
@@ -577,7 +578,7 @@
     </div>
   </section>
 
-  <!-- CONTACT & THANK YOU -->
+  <!-- CONTACT & SYMBOL-ONLY REDIRECT CARDS -->
   <section id="contact">
     <div class="wrap">
       <div class="col-label">GET IN TOUCH</div>
@@ -585,21 +586,21 @@
       <p class="h-sub">Open for Data Analyst, Power BI, and Business Analyst opportunities.</p>
       
       <div class="contact-grid">
-        <a class="contact-card" href="mailto:daxeshdataanalyst@gmail.com">
-          <div class="contact-ico"><img src="icons8-gmail-48.png" alt="Email"></div>
-          <div><span class="k">Email</span><span class="v">daxeshdataanalyst@gmail.com</span></div>
+        <a class="contact-card" href="mailto:daxeshdataanalyst@gmail.com" aria-label="Email">
+          <div class="contact-ico-large"><img src="icons8-gmail-48.png" alt="Email"></div>
+          <span class="label-txt">Email</span>
         </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/daxesh-patel-0a451a294/" target="_blank" rel="noopener">
-          <div class="contact-ico"><img src="icons8-linkedin-48.png" alt="LinkedIn"></div>
-          <div><span class="k">LinkedIn</span><span class="v">daxesh-patel-0a451a294</span></div>
+        <a class="contact-card" href="https://www.linkedin.com/in/daxesh-patel-0a451a294/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <div class="contact-ico-large"><img src="icons8-linkedin-48.png" alt="LinkedIn"></div>
+          <span class="label-txt">LinkedIn</span>
         </a>
-        <a class="contact-card" href="https://github.com/daxesh38" target="_blank" rel="noopener">
-          <div class="contact-ico"><img src="icons8-github-logo-48.png" alt="GitHub"></div>
-          <div><span class="k">GitHub</span><span class="v">github.com/daxesh38</span></div>
+        <a class="contact-card" href="https://github.com/daxesh38" target="_blank" rel="noopener" aria-label="GitHub">
+          <div class="contact-ico-large"><img src="icons8-github-logo-48.png" alt="GitHub"></div>
+          <span class="label-txt">GitHub</span>
         </a>
-        <a class="contact-card" href="tel:+919727952878">
-          <div class="contact-ico"><img src="icons8-phone-48.png" alt="Phone"></div>
-          <div><span class="k">Phone</span><span class="v">+91 97279 52878</span></div>
+        <a class="contact-card" href="tel:+919727952878" aria-label="Phone Call">
+          <div class="contact-ico-large"><img src="icons8-phone-48.png" alt="Phone"></div>
+          <span class="label-txt">Call Me</span>
         </a>
       </div>
 
@@ -663,24 +664,45 @@
   }
   setTimeout(typeWriter, 400);
 
-  // Skill Rain Animation (First 7 Seconds)
+  // Skill Rain Animation (First 7 Seconds using real uploaded skill symbols/logos)
   const rainContainer = document.getElementById('skill-rain-container');
-  const skillSymbols = ['Power BI', 'MySQL', 'Excel', 'DAX', 'ETL', 'SQL', 'Data Modeling', 'Power Query'];
+  const skillIcons = [
+    { name: 'Power BI', img: 'icons8-power-bi-logo-48.png' },
+    { name: 'MySQL', img: 'icons8-mysql-logo-48.png' },
+    { name: 'Excel', img: 'icons8-excel-48.png' },
+    { name: 'SQL', img: 'icons8-sql-48.png' }
+  ];
+  
   const rainInterval = setInterval(() => {
+    const item = skillIcons[Math.floor(Math.random() * skillIcons.length)];
     const sym = document.createElement('div');
     sym.className = 'rain-symbol';
-    sym.textContent = skillSymbols[Math.floor(Math.random() * skillSymbols.length)];
-    sym.style.left = Math.random() * 92 + 4 + '%';
-    sym.style.animationDuration = (Math.random() * 2.5 + 3.5) + 's';
+    sym.innerHTML = `<img src="${item.img}" alt="${item.name}">${item.name}`;
+    sym.style.left = Math.random() * 90 + 5 + '%';
+    sym.style.animationDuration = (Math.random() * 2 + 4) + 's';
     rainContainer.appendChild(sym);
     setTimeout(() => { sym.remove(); }, 6000);
-  }, 350);
+  }, 400);
 
   setTimeout(() => {
     clearInterval(rainInterval);
   }, 7500);
 
-  // Bottom Contact Icons Bounce on Scroll End
+  // Scroll Observer for Core Skills Animation (Left, Right, Air drop)
+  const observerOptions = { threshold: 0.15 };
+  const skillObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.skill-badge').forEach(el => {
+    skillObserver.observe(el);
+  });
+
+  // Bottom Contact Cards Bounce on Scroll End
   let scrollTimeout;
   window.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
@@ -688,7 +710,7 @@
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 150) {
         document.querySelectorAll('.contact-card').forEach(card => {
           card.classList.add('bounce-contact');
-          setTimeout(() => card.classList.remove('bounce-contact'), 1600);
+          setTimeout(() => card.classList.remove('bounce-contact', 1600));
         });
       }
     }, 150);
@@ -710,7 +732,6 @@
       modalIframe.src = embedUrl;
       modalExternal.href = embedUrl;
       modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'true'); // reset
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     });
