@@ -63,6 +63,10 @@
   .hero h1{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(38px,5.2vw,54px); line-height:1.08; letter-spacing:-0.03em; margin:0 0 24px; color:#0f172a; }
   .hero h1 span.accent{ color:var(--primary); display:block; margin-top:4px; }
   
+  /* Typing cursor effect */
+  .typed-text::after{ content:'|'; animation:blink 1s infinite; color:var(--primary); font-weight:400; }
+  @keyframes blink{ 0%,100%{ opacity:1;} 50%{ opacity:0;} }
+
   .hero p.lede{ color:var(--muted); font-size:18px; max-width:520px; margin:0 0 32px; line-height:1.65; }
   
   .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px; }
@@ -76,10 +80,10 @@
   .btn-ghost{ border:1px solid var(--border); color:var(--text); background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.02); }
   .btn-ghost:hover{ border-color:var(--primary); color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
   
-  .social-row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .social-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
   .social-row a{ width:44px; height:44px; background:#fff; border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--muted); transition:all .2s ease; box-shadow:0 2px 6px rgba(0,0,0,0.02); padding:10px; flex-shrink:0; }
   .social-row a:hover{ color:var(--primary); border-color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
-  .social-row img{ width:100%; height:100%; object-fit:contain; display:block; }
+  .social-row img{ width:100%; height:100%; object-fit:contain; }
 
   /* 3D Pure Hover-Flip Profile Card (Triggers on hover smoothly) */
   .flip{ position:relative; width:100%; max-width:380px; margin:0 auto; aspect-ratio:1/1.08; perspective:1600px; }
@@ -92,11 +96,20 @@
   .flip-hint{ position:absolute; z-index:2; bottom:18px; left:50%; transform:translateX(-50%); white-space:nowrap; background:rgba(255,255,255,0.92); border:1px solid var(--border); backdrop-filter:blur(8px); border-radius:100px; padding:8px 18px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--primary); display:flex; align-items:center; gap:8px; pointer-events:none; box-shadow:0 6px 16px rgba(0,0,0,0.08); font-weight:600; }
   
   .flip-back{ transform:rotateY(180deg); background:linear-gradient(145deg,#ffffff,#f8fafc); border:1px solid var(--border); padding:32px 28px; display:flex; flex-direction:column; justify-content:center; }
-  .flip-back .fb-label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:10px; font-weight:700; }
+  .flip-back .fb-label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:12px; font-weight:700; }
   .flip-back h4{ font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; margin:0 0 12px; color:#0f172a; font-weight:800; }
   .flip-back p{ color:var(--muted); font-size:13.5px; line-height:1.6; margin:0 0 12px; }
   .flip-back .focus{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
   .flip-back .focus span{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--primary); background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); border-radius:100px; padding:4px 10px; font-weight:600; }
+
+  /* Rain Skill Symbols Animation (First 7 Seconds) */
+  #skill-rain-container{ position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden; }
+  .rain-symbol{ position:absolute; top:-60px; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; color:var(--primary); background:rgba(255,255,255,0.85); border:1px solid var(--border); padding:4px 10px; border-radius:100px; box-shadow:0 4px 12px rgba(37,99,235,0.15); animation:rainDrop linear forwards; opacity:0; }
+  @keyframes rainDrop{ 0%{ transform:translateY(0) scale(0.8); opacity:0.9;} 80%{ opacity:0.9;} 100%{ transform:translateY(105vh) scale(1.1); opacity:0;} }
+
+  /* Bounce animation when reaching bottom */
+  @keyframes bouncePop{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px) scale(1.05); } }
+  .bounce-contact{ animation:bouncePop 0.8s ease 2; }
 
   /* Stats Row */
   .stat-row{ margin-top:80px; display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff; box-shadow:0 15px 35px -10px rgba(0,0,0,0.05); }
@@ -213,6 +226,9 @@
 </head>
 <body>
 
+<!-- Skill Rain Animation Container -->
+<div id="skill-rain-container"></div>
+
 <!-- Navigation Bar -->
 <header class="nav">
   <div class="wrap">
@@ -237,7 +253,7 @@
       <div class="hero-grid">
         <div>
           <div class="portfolio-tag">DATA ANALYST PORTFOLIO</div>
-          <h1>Hello, I am <span class="accent">Daxesh Patel</span></h1>
+          <h1>Hello, I am <span class="accent typed-text" id="typedTitle"></span></h1>
           <p class="lede">I help people find insights through data. Data Analyst and Power BI Developer with robust professional expertise in analytics, MIS reporting, and data quality across payroll, workforce management, and manufacturing operations. Based in Vadodara, India.</p>
           <div class="hero-meta">
             <span class="chip">Power BI</span>
@@ -258,12 +274,12 @@
               <a href="https://github.com/daxesh38" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><img src="icons8-github-logo-48.png" alt="GitHub"></a>
               <a href="https://www.linkedin.com/in/daxesh-patel-0a451a294/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><img src="icons8-linkedin-48.png" alt="LinkedIn"></a>
               <a href="mailto:daxeshdataanalyst@gmail.com" aria-label="Email" title="Email"><img src="icons8-gmail-48.png" alt="Email"></a>
-              <a href="tel:+919727952878" class="social-row-phone" aria-label="Call Me" title="Call Me"><img src="icons8-phone-48.png" alt="Phone"></a>
+              <a href="tel:+919727952878" aria-label="Phone Call" title="Call Me"><img src="icons8-phone-48.png" alt="Phone"></a>
             </div>
           </div>
         </div>
 
-        <!-- Pure Hover-Flip Animated Profile Picture Card -->
+        <!-- Pure Hover-Flip Animated Profile Picture Card (No Story Text, Professional Formatting) -->
         <div>
           <div class="flip">
             <div class="halo"></div>
@@ -271,15 +287,15 @@
               <div class="flip-face flip-front">
                 <img src="profile pic.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 400 400\'><rect width=\'400\' height=\'400\' fill=\'%232563eb\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'24\' fill=\'%23ffffff\' font-weight=\'bold\'>Daxesh Patel</text></svg>'" alt="Daxesh Patel">
                 <div class="flip-hint">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 1 0 9-9M3 12l3-3M3 12l3 3"/></svg>Hover to read my story
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 1 0 9-9M3 12l3-3M3 12l3 3"/></svg>Hover to inspect profile
                 </div>
               </div>
               <div class="flip-face flip-back">
-                <div class="fb-label">Story · Who I am</div>
+                <div class="fb-label">Professional Overview</div>
                 <h4>Daxesh Patel</h4>
-                <p>Hello, I am Daxesh Patel! I am a Data Analyst &amp; Power BI Developer with robust professional work experience turning messy operational data into clear, decision-ready dashboards. My work spans payroll &amp; workforce reporting, FMCG market research, and manufacturing analytics.</p>
-                <p>In my projects, I build end-to-end data pipelines: data modelling, clean DAX measures, Power Query (M) ETL, and published executive reports.</p>
-                <div class="focus"><span>Dashboards</span><span>Data Modelling</span><span>ETL</span><span>Reporting &amp; MIS</span></div>
+                <p>Data Analyst &amp; Power BI Developer specializing in enterprise MIS reporting, data pipelines, automated ETL workflows, and advanced data modeling.</p>
+                <p>Committed to converting complex raw operational metrics into pristine, actionable executive scorecards.</p>
+                <div class="focus"><span>Power BI</span><span>MySQL</span><span>Excel</span><span>ETL &amp; Modeling</span></div>
               </div>
             </div>
           </div>
@@ -337,7 +353,7 @@
     </div>
   </section>
 
-  <!-- PROJECTS (Exact Pinned Order Matching GitHub Profile) -->
+  <!-- PROJECTS -->
   <section id="projects">
     <div class="wrap">
       <div class="col-label">PORTFOLIO WORK</div>
@@ -634,6 +650,50 @@
   menuBtn.addEventListener('click', () => { navLinks.classList.toggle('open'); });
   document.querySelectorAll('nav.links a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('open')));
 
+  // Typing Effect for Hero Title
+  const typedEl = document.getElementById('typedTitle');
+  const nameStr = "Daxesh Patel";
+  let charIdx = 0;
+  function typeWriter() {
+    if (charIdx < nameStr.length) {
+      typedEl.textContent += nameStr.charAt(charIdx);
+      charIdx++;
+      setTimeout(typeWriter, 120);
+    }
+  }
+  setTimeout(typeWriter, 400);
+
+  // Skill Rain Animation (First 7 Seconds)
+  const rainContainer = document.getElementById('skill-rain-container');
+  const skillSymbols = ['Power BI', 'MySQL', 'Excel', 'DAX', 'ETL', 'SQL', 'Data Modeling', 'Power Query'];
+  const rainInterval = setInterval(() => {
+    const sym = document.createElement('div');
+    sym.className = 'rain-symbol';
+    sym.textContent = skillSymbols[Math.floor(Math.random() * skillSymbols.length)];
+    sym.style.left = Math.random() * 92 + 4 + '%';
+    sym.style.animationDuration = (Math.random() * 2.5 + 3.5) + 's';
+    rainContainer.appendChild(sym);
+    setTimeout(() => { sym.remove(); }, 6000);
+  }, 350);
+
+  setTimeout(() => {
+    clearInterval(rainInterval);
+  }, 7500);
+
+  // Bottom Contact Icons Bounce on Scroll End
+  let scrollTimeout;
+  window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 150) {
+        document.querySelectorAll('.contact-card').forEach(card => {
+          card.classList.add('bounce-contact');
+          setTimeout(() => card.classList.remove('bounce-contact'), 1600);
+        });
+      }
+    }, 150);
+  });
+
   const modal = document.getElementById('reportModal');
   const modalIframe = document.getElementById('modalIframe');
   const modalTitle = document.getElementById('modalTitle');
@@ -650,6 +710,7 @@
       modalIframe.src = embedUrl;
       modalExternal.href = embedUrl;
       modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'true'); // reset
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     });
