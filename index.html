@@ -84,7 +84,7 @@
   .social-row a:hover{ color:var(--primary); border-color:var(--primary); background:var(--primary-soft); transform:translateY(-2px); }
   .social-row img{ width:100%; height:100%; object-fit:contain; }
 
-  /* 3D Pure Hover-Flip Profile Card (Triggers on hover smoothly) */
+  /* 3D Pure Hover-Flip Profile Card (Triggers on hover smoothly, no inspection text) */
   .flip{ position:relative; width:100%; max-width:380px; margin:0 auto; aspect-ratio:1/1.08; perspective:1600px; }
   .flip .halo{ position:absolute; inset:-20px; border-radius:30px; background:linear-gradient(135deg,#2563eb,#60a5fa,#93c5fd); filter:blur(28px); opacity:0.35; z-index:0; }
   .flip-inner{ position:relative; width:100%; height:100%; z-index:1; transition:transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style:preserve-3d; }
@@ -100,15 +100,21 @@
   .flip-back .focus{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
   .flip-back .focus span{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--primary); background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); border-radius:100px; padding:4px 10px; font-weight:600; }
 
-  /* Rain Skill Symbols Animation (First 7 Seconds with real uploaded images/symbols) */
+  /* Rain Skill Symbols Animation (First 7 Seconds with pure symbol icons only) */
   #skill-rain-container{ position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden; }
-  .rain-symbol{ position:absolute; top:-60px; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; color:var(--primary); background:rgba(255,255,255,0.92); border:1px solid var(--border); padding:5px 12px; border-radius:100px; box-shadow:0 4px 14px rgba(37,99,235,0.2); animation:rainDrop linear forwards; opacity:0; display:flex; align-items:center; gap:6px; }
-  .rain-symbol img{ width:16px; height:16px; object-fit:contain; }
+  .rain-symbol{ position:absolute; top:-60px; width:40px; height:40px; background:rgba(255,255,255,0.95); border:1px solid var(--border); padding:8px; border-radius:50%; box-shadow:0 4px 14px rgba(37,99,235,0.2); animation:rainDrop linear forwards; opacity:0; display:flex; align-items:center; justify-content:center; }
+  .rain-symbol img{ width:100%; height:100%; object-fit:contain; }
   @keyframes rainDrop{ 0%{ transform:translateY(0) scale(0.8); opacity:0.95;} 80%{ opacity:0.95;} 100%{ transform:translateY(105vh) scale(1.1); opacity:0;} }
 
-  /* Bounce animation when reaching bottom contact */
-  @keyframes bouncePop{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px) scale(1.06); } }
-  .bounce-contact{ animation:bouncePop 0.8s ease 2; }
+  /* Ball-Bounce effect for 5 seconds when reaching bottom */
+  @keyframes ballBounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-28px) scale(1.08); }
+    60% { transform: translateY(-14px) scale(1.04); }
+  }
+  .ball-bouncing {
+    animation: ballBounce 1s ease infinite;
+  }
 
   /* Scroll-Triggered Core Skills Animation Classes */
   .skill-anim-left{ opacity:0; transform:translateX(-60px); transition:all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -208,13 +214,11 @@
   .cert-badge .prog{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#d97706; margin-top:8px; font-weight:600; }
   .cert-full{ grid-column:1/-1; }
 
-  /* Contact & Symbol-Only Cards */
-  .contact-grid{ display:flex; flex-wrap:wrap; gap:18px; }
-  .contact-card{ flex:1; min-width:130px; border:1px solid var(--border); border-radius:var(--radius); padding:26px 20px; text-decoration:none; transition:all .2s ease; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.03); text-align:center; }
-  .contact-card:hover{ border-color:var(--primary); transform:translateY(-4px); box-shadow:0 15px 35px -10px rgba(37,99,235,0.2); }
-  .contact-ico-large{ width:56px; height:56px; border-radius:14px; background:var(--primary-soft); border:1px solid rgba(37,99,235,0.2); display:flex; align-items:center; justify-content:center; padding:12px; }
-  .contact-ico-large img{ width:100%; height:100%; object-fit:contain; display:block; }
-  .contact-card .label-txt{ font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); font-weight:700; }
+  /* Pure Contact Icons Grid (No background cards, no text labels) */
+  .pure-contact-row{ display:flex; gap:20px; align-items:center; flex-wrap:wrap; margin-top:20px; }
+  .pure-icon-btn{ width:64px; height:64px; border-radius:50%; background:#fff; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,0.05); transition:all .25s ease; text-decoration:none; padding:16px; flex-shrink:0; }
+  .pure-icon-btn:hover{ border-color:var(--primary); transform:translateY(-4px); box-shadow:0 15px 30px -10px rgba(37,99,235,0.25); background:var(--primary-soft); }
+  .pure-icon-btn img{ width:100%; height:100%; object-fit:contain; display:block; }
 
   .thanks{ text-align:center; padding:100px 0 50px; position:relative; overflow:hidden; }
   .thanks .pulse{ width:64px; height:64px; margin:0 auto 24px; border-radius:50%; background:var(--primary-soft); border:1px solid rgba(37,99,235,0.25); display:flex; align-items:center; justify-content:center; animation:pulse 2.6s ease-in-out infinite; }
@@ -230,7 +234,7 @@
 </head>
 <body>
 
-<!-- Skill Rain Animation Container (First 7 Seconds with real uploaded symbols) -->
+<!-- Skill Rain Animation Container (First 7 Seconds with pure symbol icons only) -->
 <div id="skill-rain-container"></div>
 
 <!-- Navigation Bar -->
@@ -283,7 +287,7 @@
           </div>
         </div>
 
-        <!-- Pure Hover-Flip Animated Profile Picture Card (No Hover text, clean back overview) -->
+        <!-- Pure Hover-Flip Animated Profile Picture Card (No hover text, clean back overview) -->
         <div>
           <div class="flip">
             <div class="halo"></div>
@@ -578,29 +582,25 @@
     </div>
   </section>
 
-  <!-- CONTACT & SYMBOL-ONLY REDIRECT CARDS -->
+  <!-- CONTACT & PURE ICON REDIRECT ROW (No cards, no text labels, 5s ball bounce) -->
   <section id="contact">
     <div class="wrap">
       <div class="col-label">GET IN TOUCH</div>
       <h2 class="h">Let's connect</h2>
       <p class="h-sub">Open for Data Analyst, Power BI, and Business Analyst opportunities.</p>
       
-      <div class="contact-grid">
-        <a class="contact-card" href="mailto:daxeshdataanalyst@gmail.com" aria-label="Email">
-          <div class="contact-ico-large"><img src="icons8-gmail-48.png" alt="Email"></div>
-          <span class="label-txt">Email</span>
+      <div class="pure-contact-row">
+        <a class="pure-icon-btn" href="mailto:daxeshdataanalyst@gmail.com" aria-label="Email" title="Email">
+          <img src="icons8-gmail-48.png" alt="Email">
         </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/daxesh-patel-0a451a294/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <div class="contact-ico-large"><img src="icons8-linkedin-48.png" alt="LinkedIn"></div>
-          <span class="label-txt">LinkedIn</span>
+        <a class="pure-icon-btn" href="https://www.linkedin.com/in/daxesh-patel-0a451a294/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <img src="icons8-linkedin-48.png" alt="LinkedIn">
         </a>
-        <a class="contact-card" href="https://github.com/daxesh38" target="_blank" rel="noopener" aria-label="GitHub">
-          <div class="contact-ico-large"><img src="icons8-github-logo-48.png" alt="GitHub"></div>
-          <span class="label-txt">GitHub</span>
+        <a class="pure-icon-btn" href="https://github.com/daxesh38" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <img src="icons8-github-logo-48.png" alt="GitHub">
         </a>
-        <a class="contact-card" href="tel:+919727952878" aria-label="Phone Call">
-          <div class="contact-ico-large"><img src="icons8-phone-48.png" alt="Phone"></div>
-          <span class="label-txt">Call Me</span>
+        <a class="pure-icon-btn" href="tel:+919727952878" aria-label="Phone Call" title="Call Me">
+          <img src="icons8-phone-48.png" alt="Phone">
         </a>
       </div>
 
@@ -664,25 +664,25 @@
   }
   setTimeout(typeWriter, 400);
 
-  // Skill Rain Animation (First 7 Seconds using real uploaded skill symbols/logos)
+  // Skill Rain Animation (First 7 Seconds using pure symbol icons only)
   const rainContainer = document.getElementById('skill-rain-container');
   const skillIcons = [
-    { name: 'Power BI', img: 'icons8-power-bi-logo-48.png' },
-    { name: 'MySQL', img: 'icons8-mysql-logo-48.png' },
-    { name: 'Excel', img: 'icons8-excel-48.png' },
-    { name: 'SQL', img: 'icons8-sql-48.png' }
+    'icons8-power-bi-logo-48.png',
+    'icons8-mysql-logo-48.png',
+    'icons8-excel-48.png',
+    'icons8-sql-48.png'
   ];
   
   const rainInterval = setInterval(() => {
-    const item = skillIcons[Math.floor(Math.random() * skillIcons.length)];
+    const imgSrc = skillIcons[Math.floor(Math.random() * skillIcons.length)];
     const sym = document.createElement('div');
     sym.className = 'rain-symbol';
-    sym.innerHTML = `<img src="${item.img}" alt="${item.name}">${item.name}`;
+    sym.innerHTML = `<img src="${imgSrc}" alt="skill">`;
     sym.style.left = Math.random() * 90 + 5 + '%';
-    sym.style.animationDuration = (Math.random() * 2 + 4) + 's';
+    sym.style.animationDuration = (Math.random() * 2 + 3.5) + 's';
     rainContainer.appendChild(sym);
     setTimeout(() => { sym.remove(); }, 6000);
-  }, 400);
+  }, 350);
 
   setTimeout(() => {
     clearInterval(rainInterval);
@@ -702,18 +702,19 @@
     skillObserver.observe(el);
   });
 
-  // Bottom Contact Cards Bounce on Scroll End
-  let scrollTimeout;
+  // Bottom Contact Icons Ball-Bounce Effect for 5 Seconds on Reach Bottom
+  let hasTriggeredBounce = false;
   window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 150) {
-        document.querySelectorAll('.contact-card').forEach(card => {
-          card.classList.add('bounce-contact');
-          setTimeout(() => card.classList.remove('bounce-contact', 1600));
-        });
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 120) {
+      if (!hasTriggeredBounce) {
+        hasTriggeredBounce = true;
+        const iconBtns = document.querySelectorAll('.pure-icon-btn');
+        iconBtns.forEach(btn => btn.classList.add('ball-bouncing'));
+        setTimeout(() => {
+          iconBtns.forEach(btn => btn.classList.remove('ball-bouncing'));
+        }, 5000); // exactly 5 seconds
       }
-    }, 150);
+    }
   });
 
   const modal = document.getElementById('reportModal');
